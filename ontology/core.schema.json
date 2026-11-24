@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://earthforge.dev/schema/core/v0.1",
+  "title": "Earthforge Core Entity",
+  "type": "object",
+  "required": ["id", "type", "spatial"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "type": { "type": "string", "minLength": 1 },
+    "name": { "type": "string" },
+    "external_ids": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "spatial": { "$ref": "#/$defs/spatialExtent" },
+    "temporal": { "$ref": "#/$defs/temporalExtent" },
+    "properties": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/property" }
+    },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relation" }
+    },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "lod": { "enum": ["L0", "L1", "L2", "L3", "L4"] },
+    "spatialExtent": {
+      "type": "object",
+      "required": ["geometry", "crs", "lod"],
+      "properties": {
+        "geometry": { "type": "object" },
+        "crs": { "type": "string" },
+        "lod": { "$ref": "#/$defs/lod" }
+      }
+    },
+    "temporalExtent": {
+      "type": "object",
+      "properties": {
+        "valid_from": { "type": ["string", "null"] },
+        "valid_to": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "uncertainty": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "low", "high"],
+          "properties": {
+            "kind": { "const": "interval" },
+            "low": { "type": "number" },
+            "high": { "type": "number" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "params"],
+          "properties": {
+            "kind": { "const": "distribution" },
+            "params": { "type": "object" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "probabilities"],
+          "properties": {
+            "kind": { "const": "categorical" },
+            "probabilities": { "type": "object" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind"],
+          "properties": {
+            "kind": { "const": "unknown" }
+          }
+        }
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "method", "valid_time", "transaction_time", "lod"],
+      "properties": {
+        "source": { "type": "string" },
+        "method": { "type": "string" },
+        "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "valid_time": { "type": "string" },
+        "transaction_time": { "type": "string" },
+        "lod": { "$ref": "#/$defs/lod" }
+      }
+    },
+    "property": {
+      "type": "object",
+      "required": ["key", "value", "unit", "provenance"],
+      "properties": {
+        "key": { "type": "string" },
+        "value": {},
+        "unit": { "type": "string" },
+        "uncertainty": { "$ref": "#/$defs/uncertainty" },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "required": ["predicate", "target", "provenance"],
+      "properties": {
+        "predicate": { "type": "string" },
+        "target": { "type": "string" },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    }
+  }
+}

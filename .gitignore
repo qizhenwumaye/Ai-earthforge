@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Data and artifacts: never commit raw datasets
+data/*
+!data/README.md
+*.tif
+*.tiff
+*.parquet
+*.zarr/
+*.pmtiles
+*.mbtiles
+*.gpkg
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Environment
+.env

@@ -1,0 +1,61 @@
+{
+  "id": "7f3c1e2a-0000-4000-8000-000000000000",
+  "type": "water.body",
+  "name": "Lake X",
+  "external_ids": {
+    "osm": "way/123456",
+    "wikidata": "Q789"
+  },
+  "spatial": {
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [0.0, 0.0],
+          [0.01, 0.0],
+          [0.01, 0.01],
+          [0.0, 0.0]
+        ]
+      ]
+    },
+    "crs": "EPSG:4326",
+    "lod": "L1"
+  },
+  "temporal": {
+    "valid_from": "1990-01-01",
+    "valid_to": null
+  },
+  "properties": [
+    {
+      "key": "surface_area",
+      "value": 12.4,
+      "unit": "km2",
+      "uncertainty": {
+        "kind": "interval",
+        "low": 12.1,
+        "high": 12.7
+      },
+      "provenance": {
+        "source": "OpenStreetMap",
+        "method": "geometry area",
+        "confidence": 0.8,
+        "valid_time": "2024-03-01",
+        "transaction_time": "2026-11-24T00:00:00Z",
+        "lod": "L1"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "predicate": "within",
+      "target": "admin/region/0000",
+      "provenance": {
+        "source": "Natural Earth",
+        "method": "point-in-polygon",
+        "valid_time": "2020-01-01",
+        "transaction_time": "2026-11-24T00:00:00Z",
+        "lod": "L1"
+      }
+    }
+  ]
+}

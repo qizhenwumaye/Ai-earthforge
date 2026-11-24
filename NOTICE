@@ -1,0 +1,11 @@
+Earthforge
+Copyright 2026 Earthforge contributors
+
+This product includes software developed at the Earthforge project.
+
+Code is licensed under Apache-2.0 (see LICENSE).
+Documentation is licensed under CC BY 4.0.
+Data composed by this project carries its own licenses; see
+docs/05-licensing.md and docs/03-data-sources.md for per-source terms
+and obligations. Share-alike and non-commercial sources are tracked
+individually and are never re-licensed under Apache-2.0.
